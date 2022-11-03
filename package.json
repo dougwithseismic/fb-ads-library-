@@ -1,0 +1,27 @@
+{
+    "name": "express-2023",
+    "type": "module",
+    "version": "1.0.0",
+    "main": "/index.js",
+    "repository": "https://github.com/dougwithseismic/express-2023.git",
+    "author": "Doug Silkstone <doug@withseismic.com>",
+    "license": "MIT",
+    "devDependencies": {
+        "axios": "^0.27.2",
+        "body-parser": "^1.20.0",
+        "bullmq": "^2.1.1",
+        "compression": "^1.7.4",
+        "cors": "^2.8.5",
+        "dotenv": "^16.0.2",
+        "esbuild": "^0.15.9",
+        "express": "^4.18.1",
+        "nodemon": "^2.0.20",
+        "xss-clean": "^0.1.1"
+    },
+    "scripts": {
+        "start": "node --experimental-specifier-resolution=node dist/index.js",
+        "build": "esbuild ./src/index.js --bundle --platform=node --external:./node_modules/* --target=node16.8 --format=esm   --outfile=./build/index.js",
+        "dev": "nodemon --exec node --experimental-specifier-resolution=node src/index.js",
+        "nodev": "node --experimental-specifier-resolution=node src/index.js"
+    }
+}
