@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
 
 const server = app.listen(port, async () => {
   console.log('👣 Backend :: Server Live on port', port)
-//   await getAdsFromPageId('129669023798560')
+  await getAdsFromPageId('129669023798560')
   //   await fetchFacebookAds()
   //   await dataScrape()
 })

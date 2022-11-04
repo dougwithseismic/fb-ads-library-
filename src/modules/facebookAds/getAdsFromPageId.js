@@ -44,6 +44,23 @@ export const getAdsFromPageId = async (searchTerm = 'Gymshark') => {
     }
   )
 
+  const checkForBlock = await page.evaluate(() => {
+    const blockMessage = document.querySelector('h2.accessible_elem')?.innerText
+    if (blockMessage && blockMessage.includes('Temporarily Blocked')) {
+      return true
+    } else {
+      return false
+    }
+  })
+
+  if (checkForBlock) {
+    console.log("We're blocked. Shiiit")
+    await page.close()
+    return { error: 'Try again later' }
+  }
+
+  console.log('loaded.')
+
   await dealWithBanners(page)
 
   // wait for sessionId to be set with while loop
