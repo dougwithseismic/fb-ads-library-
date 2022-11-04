@@ -55,13 +55,13 @@ export const getAdsFromPageId = async (searchTerm = 'Gymshark') => {
 
   if (checkForBlock) {
     console.log("We're blocked. Shiiit")
-    await page.close()
+    // await page.close()
     return { error: 'Try again later' }
   }
 
-  console.log('loaded.')
+  console.log('loaded.', sessionId)
 
-  await dealWithBanners(page)
+//   await dealWithBanners(page)
 
   // wait for sessionId to be set with while loop
   while (!sessionId) {

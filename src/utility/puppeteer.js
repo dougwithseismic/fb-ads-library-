@@ -55,7 +55,7 @@ const args = [
   '--ignore-certifcate-errors',
 
   //   `--proxy-server=http://193.8.138.71:9110`, // https://stackoverflow.com/questions/52777757/how-to-use-proxy-in-puppeteer-and-headless-chrome
-//   `--proxy-server=${basicAddress}`, // https://stackoverflow.com/questions/52777757/how-to-use-proxy-in-puppeteer-and-headless-chrome
+  `--proxy-server=${basicAddress}`, // https://stackoverflow.com/questions/52777757/how-to-use-proxy-in-puppeteer-and-headless-chrome
   '--ignore-certifcate-errors-spki-list' // '--start-maximized'
 ]
 
@@ -68,9 +68,6 @@ const options = {
   executablePath: executablePath()
 }
 
-const userAgent =
-  'Mozilla/5.0 (Linux; Android 8.0.0; SM-G930F Build/R16NW; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/74.0.3729.157 Mobile Safari/537.36'
-
 export const getBrowser = async () => {
   const IS_PRODUCTION = process.env.NODE_ENV === 'production'
   const browser = IS_PRODUCTION
@@ -81,19 +78,12 @@ export const getBrowser = async () => {
     : await puppeteer.launch(options)
 
   if (!IS_PRODUCTION) {
-    puppeteer.use(StealthPlugin()).use(
-      puppeteerPrefs({
-        userPrefs: {
-          devtools: {
-            currentDockState: 'bottom'
-          }
-        }
-      })
-    )
+    puppeteer.use(StealthPlugin())
   }
 
   const page = await browser.newPage()
   await initPuppeteer(page)
+
   await page.authenticate({
     username: getProxy().auth.username,
     password: getProxy().auth.password
