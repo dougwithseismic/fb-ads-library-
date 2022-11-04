@@ -55,7 +55,7 @@ const args = [
   '--ignore-certifcate-errors',
 
   //   `--proxy-server=http://193.8.138.71:9110`, // https://stackoverflow.com/questions/52777757/how-to-use-proxy-in-puppeteer-and-headless-chrome
-  //   `--proxy-server=${basicAddress}`, // https://stackoverflow.com/questions/52777757/how-to-use-proxy-in-puppeteer-and-headless-chrome
+  `--proxy-server=${basicAddress}`, // https://stackoverflow.com/questions/52777757/how-to-use-proxy-in-puppeteer-and-headless-chrome
   '--ignore-certifcate-errors-spki-list' // '--start-maximized'
 ]
 
@@ -94,10 +94,10 @@ export const getBrowser = async () => {
 
   const page = await browser.newPage()
   await initPuppeteer(page)
-  //   await page.authenticate({
-  //     username: getProxy().auth.username,
-  //     password: getProxy().auth.password
-  //   })
+  await page.authenticate({
+    username: getProxy().auth.username,
+    password: getProxy().auth.password
+  })
 
   return { browser, page }
 }

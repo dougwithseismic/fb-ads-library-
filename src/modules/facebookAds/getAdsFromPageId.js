@@ -38,7 +38,10 @@ export const getAdsFromPageId = async (searchTerm = 'Gymshark') => {
 
   // Then lets go to the first page. It'll make a call, that we'll intercept and grab the sessionId from.
   await page.goto(
-    'https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=US&sort_data[direction]=desc&sort_data[mode]=relevancy_monthly_grouped&media_type=all'
+    'https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=US&sort_data[direction]=desc&sort_data[mode]=relevancy_monthly_grouped&media_type=all',
+    {
+      waitUntil: 'networkidle2'
+    }
   )
 
   await dealWithBanners(page)
@@ -52,7 +55,7 @@ export const getAdsFromPageId = async (searchTerm = 'Gymshark') => {
   // With the second intercept we can get the pages id, and continue to get the ads.
   console.log('SessionId :>>', sessionId)
   let adBucket = {
-    adsCount: 0,
+    totalAds: 0,
     ads: []
   }
 
