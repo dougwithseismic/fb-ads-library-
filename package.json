@@ -28,6 +28,6 @@
         "nodev": "node --experimental-specifier-resolution=node src/index.js"
     },
     "dependencies": {
-        "puppeyarn stateer": "^19.2.2"
+        "puppeteer": "^19.2.2"
     }
 }
